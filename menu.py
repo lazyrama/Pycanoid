@@ -1,7 +1,8 @@
+import pygame
 class Menu:
-	def __init__():
+	def __init__(self):
 		pass
-	def update():
+	def update(self):
 		pass
-	def draw():
+	def draw(self):
 		pass
