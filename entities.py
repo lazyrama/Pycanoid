@@ -1,4 +1,5 @@
 import pygame
+
 from settings import VIRTUAL_PIXEL
 from settings import WIDTH, HEIGHT
 
@@ -20,6 +21,7 @@ class Racket:
         pass
 
 
+"""
 class Block:
     def __init__(self, x, y):
         self.x = x
@@ -32,6 +34,7 @@ class Block:
     def draw(self, screen):
         pygame.draw.rect()
         pass
+"""
 
 
 class Ball:
