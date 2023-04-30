@@ -2,6 +2,7 @@ import pygame
 from pygame.time import Clock as clock
 from entities import Racket, Ball
 from settings import WIDTH, HEIGHT
+from loader import LevelLoader
 
 
 class Arcanoid:
@@ -12,6 +13,7 @@ class Arcanoid:
 		self.ball = Ball()
 		self.running = True
 		self.clock = clock()
+		self.level = LevelLoader()
 		pass
 
 	def update(self):
@@ -39,6 +41,7 @@ class Arcanoid:
 		self.screen.fill((0, 0, 0))
 		self.racket.draw(self.screen)
 		self.ball.draw(self.screen)
+		self.level.draw(self.screen)
 		pygame.display.update()
 
 	def run(self):
