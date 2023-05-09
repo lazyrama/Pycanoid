@@ -7,10 +7,6 @@ from settings import WIDTH, HEIGHT
 class Racket(pygame.Rect):
     def __init__(self):
         super().__init__((WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL, 6 * VIRTUAL_PIXEL, VIRTUAL_PIXEL))
-        #self.x =
-        #self.y =
-        #self.width =
-        #self.height =
 
     def draw(self, screen):
         pygame.draw.rect(screen, (0, 255, 0), (self.x, self.y, self.width, self.height))
@@ -20,10 +16,6 @@ class Racket(pygame.Rect):
 class Block(pygame.Rect):
     def __init__(self, x, y):
         super().__init__((x, y, VIRTUAL_PIXEL * 4, VIRTUAL_PIXEL))
-        #self.x =
-        #self.y =
-        #self.width =
-        #self.height =
         self.is_destroyed = False
 
     def draw(self, screen):
@@ -34,10 +26,6 @@ class Block(pygame.Rect):
 class Ball(pygame.Rect):
     def __init__(self):
         super().__init__(WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL, VIRTUAL_PIXEL, VIRTUAL_PIXEL)
-        #self.x =
-        #self.y =
-        #self.width =
-        #self.height =
         self.x_speed = 0.35
         self.y_speed = -0.35
         # self.coeff = 5
