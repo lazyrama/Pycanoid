@@ -1,9 +1,8 @@
 import pygame
-from pygame.time import Clock as clock
+from pygame.time import Clock
 from entities import Racket, Ball
 from settings import WIDTH, HEIGHT, VIRTUAL_PIXEL
 from loader import LevelLoader
-import sys
 
 
 class Arcanoid:
@@ -13,7 +12,7 @@ class Arcanoid:
         self.racket = Racket()
         self.ball = Ball()
         self.running = True
-        self.clock = clock()
+        self.clock = Clock()
         self.level = LevelLoader()
         font = pygame.font.Font('freesansbold.ttf', 32)
         self.text = font.render('Game Over', True, (0, 255, 0), (0, 0, 255))
@@ -63,8 +62,8 @@ class Arcanoid:
             elif self.ball.x_speed < 0 and self.ball.x_speed < -1:
                 self.ball.x_speed += 0.01
 
-        is_gameover = self.ball.update(self.clock.get_time())
-        if is_gameover:
+        is_gameOver = self.ball.update(self.clock.get_time())
+        if is_gameOver:
             self.running = False
         for line in self.level.campaign[0]:
             for block in line:

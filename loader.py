@@ -1,4 +1,3 @@
-import pygame
 from settings import VIRTUAL_PIXEL
 from entities import Block
 

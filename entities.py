@@ -28,7 +28,7 @@ class Ball(pygame.Rect):
         super().__init__(WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL, VIRTUAL_PIXEL, VIRTUAL_PIXEL)
         self.x_speed = 0.35
         self.y_speed = -0.35
-        # self.coeff = 5
+        # self.coefficient = 5
 
     def update(self, delta):
         self.move_ip(self.x_speed * delta, self.y_speed * delta)

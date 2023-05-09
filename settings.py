@@ -2,10 +2,3 @@ WIDTH, HEIGHT = 1080, 768
 SCORE_PER_BLOCK = 100
 LOAD_CUSTOM = False
 VIRTUAL_PIXEL = 20
-
-"""
-class GameStates(Enum):
-	MENU = 0
-	GAME = 1
-	GAME_OVER = 2
-"""
