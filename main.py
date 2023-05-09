@@ -7,7 +7,7 @@ from loader import LevelLoader
 
 class Arcanoid:
 	def __init__(self):
-		pygame.init() #
+		pygame.init()
 		self.screen = pygame.display.set_mode((WIDTH, HEIGHT), flags=pygame.FULLSCREEN)
 		self.racket = Racket()
 		self.ball = Ball()
@@ -26,16 +26,19 @@ class Arcanoid:
 
 		key = pygame.key.get_pressed()
 		if key[pygame.K_a] or key[pygame.K_LEFT]:
-			self.racket.rect.left -= 1 * self.clock.get_time()
+			self.racket.x -= 1 * self.clock.get_time()
 		if key[pygame.K_d] or key[pygame.K_RIGHT]:
-			self.racket.rect.right += 1 * self.clock.get_time()
+			self.racket.x += 1 * self.clock.get_time()
 
-		if self.racket.rect.colliderect(self.ball.rect):
+		if self.racket.colliderect(self.ball):
 			self.ball.y_speed *= -1
-			self.ball.x_speed *= -1
+			#self.ball.x_speed *= -1
 
-		#self.racket.update()
 		self.ball.update(self.clock.get_time())
+		for line in self.level.campaign[0]:
+			for block in line:
+				if self.ball.colliderect(block):
+					block.is_destroyed = True
 
 	def draw(self):
 		self.screen.fill((0, 0, 0))
