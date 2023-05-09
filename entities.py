@@ -46,11 +46,8 @@ class Ball(pygame.Rect):
         self.move_ip(self.x_speed * delta, self.y_speed * delta)
         if self.x >= WIDTH or self.x <= 0:
             self.x_speed *= -1
-        if self.y >= (HEIGHT - VIRTUAL_PIXEL):
-            return 1
-        if self.y <= VIRTUAL_PIXEL:
+        if self.y >= (HEIGHT - VIRTUAL_PIXEL) or self.y <= VIRTUAL_PIXEL:
             self.y_speed *= -1
-        return 0
 
     def draw(self, screen):
         pygame.draw.rect(screen, (255, 0, 0), (self.x, self.y, self.width, self.height))
