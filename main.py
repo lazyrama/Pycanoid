@@ -3,6 +3,7 @@ from pygame.time import Clock as clock
 from entities import Racket, Ball
 from settings import WIDTH, HEIGHT, VIRTUAL_PIXEL
 from loader import LevelLoader
+import sys
 
 
 class Arcanoid:
@@ -21,16 +22,17 @@ class Arcanoid:
         # set the center of the rectangular object.
         self.textRect.center = (WIDTH // 2, HEIGHT // 2)
 
-        pass
-
     def update(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.display.quit()
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    self.running = False
+                    pygame.display.quit()
                     pygame.quit()
-
+                    quit()
         key = pygame.key.get_pressed()
         if key[pygame.K_a] or key[pygame.K_LEFT]:
             self.racket.x -= 1 * self.clock.get_time()
@@ -81,18 +83,19 @@ class Arcanoid:
             self.update()
             self.draw()
             self.clock.tick(30.0)
-        while not self.running:
-            self.screen.fill((0, 0, 0))
-            self.screen.blit(self.text, self.textRect)
 
+        self.screen.fill((0, 0, 0))
+        self.screen.blit(self.text, self.textRect)
+        pygame.display.update()
+
+        while not self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-
-            pygame.display.update()
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    pygame.display.quit()
+                    pygame.quit()
+                    quit()
 
 
 game = Arcanoid()
