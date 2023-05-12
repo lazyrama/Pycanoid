@@ -26,13 +26,12 @@ class LevelLoader:
                 line1 = []
                 for k, block in enumerate(line):
                     if block == "#":
-                        print(543, block)
-                        line1.append(Block(k * 6 * VIRTUAL_PIXEL, j * 2 * VIRTUAL_PIXEL,
+                        line1.append(Block(k * 4 * VIRTUAL_PIXEL, 2 * VIRTUAL_PIXEL + j * VIRTUAL_PIXEL,
                                            ))
                 level1.append(line1)
             self.campaign.append(level1)
 
     def draw(self, screen):
-        for line in self.campaign[0]:
+        for line in self.campaign[1]:
             for block in line:
                 block.draw(screen)
