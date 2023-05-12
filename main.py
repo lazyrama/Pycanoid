@@ -14,7 +14,8 @@ class Arcanoid:
 
         self.racket = Racket()
         self.ball = Ball()
-        self.level = LevelLoader()
+        self.loader = LevelLoader()
+        self.level_num = 0
         self.clock = Clock()
 
         self.font = pygame.font.Font('freesansbold.ttf', 32)
@@ -75,7 +76,7 @@ class Arcanoid:
         is_game_over = self.ball.update(self.clock.get_time())
         if is_game_over:
             self.running = False
-        for line in self.level.campaign[1]:
+        for line in self.loader.campaign[self.level_num]:
             for block in line:
                 if self.ball.colliderect(block) and not block.is_destroyed:
                     block.is_destroyed = True
@@ -91,7 +92,7 @@ class Arcanoid:
 
         self.racket.draw(self.screen)
         self.ball.draw(self.screen)
-        self.level.draw(self.screen)
+        self.loader.draw(self.screen, self.level_num)
 
         pygame.display.update()
 
