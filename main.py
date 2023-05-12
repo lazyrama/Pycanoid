@@ -40,11 +40,13 @@ class Arcanoid:
                     pygame.display.quit()
                     pygame.quit()
                     quit()
+
         key = pygame.key.get_pressed()
         if key[pygame.K_a] or key[pygame.K_LEFT]:
             self.racket.x -= 1 * self.clock.get_time()
         if key[pygame.K_d] or key[pygame.K_RIGHT]:
             self.racket.x += 1 * self.clock.get_time()
+        self.racket.update()
 
         if self.racket.colliderect(self.ball):
             if self.ball.x > (self.racket.centerx + VIRTUAL_PIXEL // 2) and self.ball.x_speed < 0:

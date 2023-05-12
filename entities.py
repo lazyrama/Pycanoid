@@ -8,6 +8,12 @@ class Racket(pygame.Rect):
     def __init__(self):
         super().__init__((WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL, 6 * VIRTUAL_PIXEL, VIRTUAL_PIXEL))
 
+    def update(self):
+        if self.x < 0:
+            self.x = 0
+        if self.x > (WIDTH - self.width):
+            self.x = (WIDTH - self.width)
+
     def draw(self, screen):
         pygame.draw.rect(screen, (0, 255, 0), (self.x, self.y, self.width, self.height))
         pass
