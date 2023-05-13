@@ -8,7 +8,7 @@ from loader import LevelLoader
 class Arcanoid:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT), flags=pygame.FULLSCREEN|pygame.SCALED)
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT), flags=pygame.FULLSCREEN | pygame.SCALED)
         self.alpha_surface = pygame.Surface((WIDTH, HEIGHT))
         self.alpha_surface.set_alpha(40)
 
@@ -30,6 +30,13 @@ class Arcanoid:
 
         self.running = True
 
+    def is_level_ended(self):
+        for line in self.loader.campaign[self.level_num]:
+            for block in line:
+                if not block.is_destroyed:
+                    return 0
+        return 1
+
     def update(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -41,6 +48,12 @@ class Arcanoid:
                     pygame.display.quit()
                     pygame.quit()
                     quit()
+
+        if self.is_level_ended():
+            self.score = 0
+            self.level_num += 1
+            self.racket.x, self.racket.y = WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL
+            self.ball.x, self.ball.y = WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL
 
         key = pygame.key.get_pressed()
         if key[pygame.K_a] or key[pygame.K_LEFT]:
@@ -86,7 +99,7 @@ class Arcanoid:
         self.scoreRect = self.scoreFont.get_rect()
 
     def draw(self):
-        #self.screen.fill((0, 0, 0))
+        # self.screen.fill((0, 0, 0))
         self.screen.blit(self.alpha_surface, (0, 0))
         self.screen.blit(self.scoreFont, self.scoreRect)
 
@@ -97,6 +110,7 @@ class Arcanoid:
         pygame.display.update()
 
     def run(self):
+        print(self.is_level_ended())
         while self.running:
             self.update()
             self.draw()

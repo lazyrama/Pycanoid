@@ -38,11 +38,11 @@ class Ball(pygame.Rect):
 
     def update(self, delta):
         self.move_ip(self.x_speed * delta, self.y_speed * delta)
-        if self.x >= WIDTH or self.x <= 0:
+        if self.x >= WIDTH - VIRTUAL_PIXEL or self.x <= 0:
             self.x_speed *= -1
         if self.y >= (HEIGHT - VIRTUAL_PIXEL):
             return 1
-        if self.y <= VIRTUAL_PIXEL:
+        if self.y <= 2 * VIRTUAL_PIXEL:
             self.y_speed *= -1
         return 0
 
