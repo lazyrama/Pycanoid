@@ -26,10 +26,10 @@ class Arcanoid:
         self.scoreFont = font.render('{}'.format(self.score), True, (0, 255, 0), (0, 0, 255))
         self.scoreRect = self.scoreFont.get_rect()
 
-        self.text = font.render('Game Over', True, (0, 255, 0), (0, 0, 255))
-        self.textRect = self.text.get_rect()
+        self.game_over = font.render('Game Over\n Press space for replaying, esc for exiting', True, (0, 255, 0), (0, 0, 255))
+        self.game_overRect = self.game_over.get_rect()
         # set the center of the rectangular object.
-        self.textRect.center = (WIDTH // 2, HEIGHT // 2)
+        self.game_overRect.center = (WIDTH // 2, HEIGHT // 2)
 
         self.state = GameState.MENU
 
@@ -53,7 +53,7 @@ class Arcanoid:
             if event.type == pygame.MOUSEBUTTONUP and self.state == GameState.MENU:
                 if self.menu.update(pygame.mouse.get_pos()):
                     self.state = GameState.LEVEL
-
+        key = pygame.key.get_pressed()
         if self.state == GameState.LEVEL:
             if self.is_level_ended():
                 self.score = 0
@@ -61,7 +61,6 @@ class Arcanoid:
                 self.racket.x, self.racket.y = WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL
                 self.ball.x, self.ball.y = WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL
 
-            key = pygame.key.get_pressed()
             if key[pygame.K_a] or key[pygame.K_LEFT]:
                 self.racket.x -= 1 * self.clock.get_time()
             if key[pygame.K_d] or key[pygame.K_RIGHT]:
@@ -103,8 +102,14 @@ class Arcanoid:
 
             self.scoreFont = font.render('{}'.format(self.score), True, (0, 255, 0), (0, 0, 255))
             self.scoreRect = self.scoreFont.get_rect()
+
         elif self.state == GameState.GAME_OVER:
-            print(2)
+            if key[pygame.K_SPACE]:
+                self.state = GameState.LEVEL
+                self.score = 0
+                self.racket.x, self.racket.y = WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL
+                self.ball.x, self.ball.y = WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL
+                self.loader = LevelLoader()
 
     def draw(self):
         # self.screen.fill((0, 0, 0))
@@ -121,7 +126,7 @@ class Arcanoid:
 
         if self.state == GameState.GAME_OVER:
             self.screen.fill((0, 0, 0))
-            self.screen.blit(self.text, self.textRect)
+            self.screen.blit(self.game_over, self.game_overRect)
 
         pygame.display.update()
 
