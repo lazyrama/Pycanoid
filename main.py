@@ -19,14 +19,15 @@ class Arcanoid:
         self.racket = Racket()
         self.ball = Ball()
         self.loader = LevelLoader()
-        self.level_num = 0
+        self.level_num = 2
         self.clock = Clock()
 
         self.score = 0
         self.scoreFont = font.render('{}'.format(self.score), True, (0, 255, 0), (0, 0, 255))
         self.scoreRect = self.scoreFont.get_rect()
 
-        self.game_over = font.render('Game Over, press space for replaying, esc for exiting', True, (0, 255, 0), (0, 0, 255))
+        self.game_over = font.render('Game Over, press space for replaying, esc for exiting', True, (0, 255, 0),
+                                     (0, 0, 255))
         self.game_overRect = self.game_over.get_rect()
         # set the center of the rectangular object.
         self.game_overRect.center = (WIDTH // 2, HEIGHT // 2)
@@ -41,6 +42,7 @@ class Arcanoid:
         return 1
 
     def update(self):
+        touched = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.display.quit()
@@ -50,8 +52,12 @@ class Arcanoid:
                     pygame.display.quit()
                     pygame.quit()
                     quit()
-            if event.type == pygame.MOUSEBUTTONUP and self.state == GameState.MENU:
-                if self.menu.update(pygame.mouse.get_pos()):
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.racket.collidepoint(pygame.mouse.get_pos()):
+                    touched = True
+            if event.type == pygame.MOUSEBUTTONUP:
+                touched = False
+                if self.menu.update(pygame.mouse.get_pos()) and self.state == GameState.MENU:
                     self.state = GameState.LEVEL
         key = pygame.key.get_pressed()
         if self.state == GameState.LEVEL:
@@ -60,6 +66,9 @@ class Arcanoid:
                 self.level_num += 1
                 self.racket.x, self.racket.y = WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL
                 self.ball.x, self.ball.y = WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL
+
+            if touched:
+                self.racket.move_ip(pygame.mouse.get_rel()[0], 0)
 
             if key[pygame.K_a] or key[pygame.K_LEFT]:
                 self.racket.x -= 1 * self.clock.get_time()
