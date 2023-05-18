@@ -26,7 +26,7 @@ class Arcanoid:
         self.scoreFont = font.render('{}'.format(self.score), True, (0, 255, 0), (0, 0, 255))
         self.scoreRect = self.scoreFont.get_rect()
 
-        self.game_over = font.render('Game Over\n Press space for replaying, esc for exiting', True, (0, 255, 0), (0, 0, 255))
+        self.game_over = font.render('Game Over, press space for replaying, esc for exiting', True, (0, 255, 0), (0, 0, 255))
         self.game_overRect = self.game_over.get_rect()
         # set the center of the rectangular object.
         self.game_overRect.center = (WIDTH // 2, HEIGHT // 2)
