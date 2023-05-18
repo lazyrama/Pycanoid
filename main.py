@@ -33,6 +33,7 @@ class Arcanoid:
         self.game_overRect.center = (WIDTH // 2, HEIGHT // 2)
 
         self.state = GameState.MENU
+        self.touched = False
 
     def is_level_ended(self):
         for line in self.loader.campaign[self.level_num]:
@@ -42,7 +43,6 @@ class Arcanoid:
         return 1
 
     def update(self):
-        touched = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.display.quit()
@@ -53,10 +53,10 @@ class Arcanoid:
                     pygame.quit()
                     quit()
             elif event.type == pygame.MOUSEBUTTONDOWN and self.racket.collidepoint(event.pos):
-                touched = True
+                self.touched = True
                 pygame.mouse.get_rel()
             elif event.type == pygame.MOUSEBUTTONUP:
-                touched = False
+                self.touched = False
                 if self.menu.update(pygame.mouse.get_pos()) and self.state == GameState.MENU:
                     self.state = GameState.LEVEL
 
@@ -68,7 +68,7 @@ class Arcanoid:
                 self.racket.x, self.racket.y = WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL
                 self.ball.x, self.ball.y = WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL
 
-            if touched:
+            if self.touched:
                 self.racket.move_ip(pygame.mouse.get_rel()[0], 0)
 
             if key[pygame.K_a] or key[pygame.K_LEFT]:
