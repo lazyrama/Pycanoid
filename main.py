@@ -19,7 +19,7 @@ class Arcanoid:
         self.racket = Racket()
         self.ball = Ball()
         self.loader = LevelLoader()
-        self.level_num = 2
+        self.level_num = 0
         self.clock = Clock()
 
         self.score = 0
