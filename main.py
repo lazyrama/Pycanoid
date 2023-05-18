@@ -47,18 +47,19 @@ class Arcanoid:
             if event.type == pygame.QUIT:
                 pygame.display.quit()
                 pygame.quit()
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.display.quit()
                     pygame.quit()
                     quit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.racket.collidepoint(pygame.mouse.get_pos()):
-                    touched = True
-            if event.type == pygame.MOUSEBUTTONUP:
+            elif event.type == pygame.MOUSEBUTTONDOWN and self.racket.collidepoint(event.pos):
+                touched = True
+                pygame.mouse.get_rel()
+            elif event.type == pygame.MOUSEBUTTONUP:
                 touched = False
                 if self.menu.update(pygame.mouse.get_pos()) and self.state == GameState.MENU:
                     self.state = GameState.LEVEL
+
         key = pygame.key.get_pressed()
         if self.state == GameState.LEVEL:
             if self.is_level_ended():
