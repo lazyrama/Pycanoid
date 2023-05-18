@@ -52,7 +52,7 @@ class Arcanoid:
                     pygame.display.quit()
                     pygame.quit()
                     quit()
-            elif event.type == pygame.MOUSEBUTTONDOWN and self.racket.collidepoint(event.pos):
+            elif event.type == pygame.MOUSEBUTTONDOWN: # and self.racket.collidepoint(event.pos):
                 self.touched = True
                 pygame.mouse.get_rel()
             elif event.type == pygame.MOUSEBUTTONUP:
