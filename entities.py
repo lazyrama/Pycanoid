@@ -6,7 +6,7 @@ from settings import WIDTH, HEIGHT
 
 class Racket(pygame.Rect):
     def __init__(self):
-        super().__init__((WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL, 6 * VIRTUAL_PIXEL, VIRTUAL_PIXEL))
+        super().__init__((WIDTH // 2 - 4.5 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL, 9 * VIRTUAL_PIXEL, VIRTUAL_PIXEL))
 
     def update(self):
         if self.x < 0:
@@ -38,7 +38,11 @@ class Ball(pygame.Rect):
 
     def update(self, delta):
         self.move_ip(self.x_speed * delta, self.y_speed * delta)
-        if self.x >= WIDTH - VIRTUAL_PIXEL or self.x <= 0:
+        if self.x >= WIDTH - VIRTUAL_PIXEL:
+            self.x = WIDTH - VIRTUAL_PIXEL
+            self.x_speed *= -1
+        if self.x <= 0:
+            self.x = 0
             self.x_speed *= -1
         if self.y >= (HEIGHT - VIRTUAL_PIXEL):
             return 1
