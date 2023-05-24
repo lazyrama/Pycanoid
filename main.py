@@ -64,7 +64,10 @@ class Arcanoid:
         if self.state == GameState.LEVEL:
             if self.is_level_ended():
                 self.score = 0
-                self.level_num += 1
+                if self.level_num < len(self.loader.campaign):
+                    self.level_num += 1
+                else:
+                    exit()
                 self.racket.x, self.racket.y = WIDTH // 2 - 3 * VIRTUAL_PIXEL, HEIGHT - VIRTUAL_PIXEL
                 self.ball.x, self.ball.y = WIDTH // 2 - VIRTUAL_PIXEL // 2, HEIGHT - 2 * VIRTUAL_PIXEL
 
