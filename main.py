@@ -1,3 +1,16 @@
+# Todo
+# * add ending for game
+# * add current level number showing and better score
+# * add new levels
+# * think about graphics enchantments
+# * maybe add bonus for bigger ball?
+# * add bonus for multiple balls
+# * add bonus stacking
+# * refactor game architecture?
+# * add menu for choosing level?
+# * add choosing levels file?
+# * add saves?
+# * add color changing that shows that level is completed
 import pygame
 from pygame.time import Clock
 from entities import Racket, Ball
