@@ -30,7 +30,7 @@ class Arcanoid:
         self.game_end = GameEnd(font)
 
         self.is_game_over = False
-        self.level_num = 2
+        self.level_num = 0
         self.score = 0
 
         self.racket = Racket()
@@ -39,7 +39,7 @@ class Arcanoid:
         self.level = Level(self.loader, self.level_num, self.score, font)
         self.clock = Clock()
 
-        self.state = GameState.END
+        self.state = GameState.MENU
         self.touched = False
 
     def is_level_ended(self):
