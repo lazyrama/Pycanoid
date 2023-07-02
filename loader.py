@@ -30,8 +30,3 @@ class LevelLoader:
                                            ))
                 level1.append(line1)
             self.campaign.append(level1)
-
-    def draw(self, screen, level):
-        for line in self.campaign[level]:
-            for block in line:
-                block.draw(screen)

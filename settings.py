@@ -12,3 +12,4 @@ class GameState(Enum):
     MENU = 0
     LEVEL = 1
     GAME_OVER = 2
+    END = 3
